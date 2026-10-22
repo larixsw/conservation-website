@@ -1,4 +1,5 @@
 import Page from '../components/Page'
+import {DocumentField} from '../components/Document'
 import {DocumentRenderer} from '@keystone-6/document-renderer'
 import {useQuery, gql} from '@apollo/client'
 import {FieldValues, useForm} from 'react-hook-form'
@@ -28,7 +29,7 @@ export default function Feedback() {
       image: {
         url: string
       }
-      content: any
+      content: DocumentField
     }
     mailRecipients: {
       email: string
@@ -91,7 +92,7 @@ function FeedbackForm(props: {emails: string}) {
       await axios.postForm('/send-multipart-message', {message: body, images})
       reset()
       setFormState(states.submitted)
-    } catch (error) {
+    } catch {
       setFormState(states.failed)
     }
   }
@@ -130,7 +131,7 @@ function FeedbackForm(props: {emails: string}) {
               type="tel"
               id="phone"
               placeholder="(902) 555-1234"
-              {...register('phone', {pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im})}
+              {...register('phone', {pattern: /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im})}
               className={cx({invalid: errors.phone})}
             />
             {errors.phone && <p className="text-sm text-red-600">Please enter a valid phone number</p>}

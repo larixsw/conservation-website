@@ -2,11 +2,12 @@ import {useState} from 'react'
 import {gql, useQuery} from '@apollo/client'
 import {Link} from 'react-router-dom'
 
-import {getStatusInfo, OrganismType} from './Organism'
+import {OrganismType} from './Organism'
+import {getStatusInfo} from '../utils/conservation-status'
 
 import Page from '../components/Page'
 import Filter from '../components/Filter'
-import Document from '../components/Document'
+import Document, {DocumentField} from '../components/Document'
 
 export default function Ecosystem() {
   const [filter, setFilter] = useState<string | null>(null)
@@ -32,7 +33,7 @@ export default function Ecosystem() {
   `
 
   interface EcosystemData {
-    ecosystemPage: any
+    ecosystemPage: {content: DocumentField} | null
     organisms: OrganismType[]
   }
 
@@ -46,9 +47,9 @@ export default function Ecosystem() {
         <Document document={document} />
       </div>
       <div className="flex flex-wrap gap-2 mb-4 items-center">
-        <Filter tag="Flora" filter={filter} callback={(filter: string) => setFilter(filter)} />
-        <Filter tag="Fauna" filter={filter} callback={(filter: string) => setFilter(filter)} />
-        <Filter tag="Fungi" filter={filter} callback={(filter: string) => setFilter(filter)} />
+        <Filter tag="Flora" filter={filter} callback={setFilter} />
+        <Filter tag="Fauna" filter={filter} callback={setFilter} />
+        <Filter tag="Fungi" filter={filter} callback={setFilter} />
       </div>
       <div className="columns-xs gap-4">
         {organisms

@@ -62,7 +62,7 @@ export default function Gallery() {
       </div>
       <div className="flex flex-wrap gap-2 mb-4 items-center">
         {data.galleryTags.map((tag, i) => (
-          <Filter key={i} tag={tag.tagName} filter={filter} callback={(filter: string) => setFilter(filter)} />
+          <Filter key={i} tag={tag.tagName} filter={filter} callback={setFilter} />
         ))}
       </div>
       <div className="columns-xs gap-4">

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {FaArrowsUpDown, FaArrowsLeftRight, FaChartSimple} from 'react-icons/fa6'
 
 import Page from '../components/Page'
-import Document from '../components/Document'
+import Document, {DocumentField} from '../components/Document'
 
 export interface TrailType {
   name: string
@@ -16,7 +16,7 @@ export interface TrailType {
   image: {
     url: string
   }
-  description: any
+  description: DocumentField
 }
 
 export default function Trails() {
@@ -43,7 +43,7 @@ export default function Trails() {
   `
 
   interface TrailsData {
-    trailPage: any
+    trailPage: {content: DocumentField} | null
     trails: TrailType[]
   }
 

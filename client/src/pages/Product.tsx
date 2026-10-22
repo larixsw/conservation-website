@@ -4,6 +4,7 @@ import {Link, useParams} from 'react-router-dom'
 import {FaMapPin} from 'react-icons/fa'
 
 import Page from '../components/Page'
+import {DocumentField} from '../components/Document'
 
 export interface ProductType {
   title: string
@@ -13,7 +14,7 @@ export interface ProductType {
   image: {
     url: string
   }
-  description: any
+  description: DocumentField
 }
 
 export default function Product() {

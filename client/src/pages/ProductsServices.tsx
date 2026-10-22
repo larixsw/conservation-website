@@ -4,6 +4,7 @@ import {DocumentRenderer} from '@keystone-6/document-renderer'
 import {FaMapPin} from 'react-icons/fa'
 
 import Page from '../components/Page'
+import Document, {DocumentField} from '../components/Document'
 import {ProductType} from './Product'
 
 export default function ProductsServices() {
@@ -31,7 +32,7 @@ export default function ProductsServices() {
 
   interface ProductsData {
     products: ProductType[]
-    productsServicesPage: any
+    productsServicesPage: {content: DocumentField} | null
   }
 
   const {loading, error, data} = useQuery<ProductsData>(query)
@@ -45,7 +46,7 @@ export default function ProductsServices() {
   return (
     <Page name="Products and Services">
       <div className="flex flex-col gap-8">
-        <DocumentRenderer document={document} />
+        <Document document={document} />
         <div className="flex flex-col gap-8">
           {data.products.map((product, i) => (
             <ProductPreview key={i} product={product} />

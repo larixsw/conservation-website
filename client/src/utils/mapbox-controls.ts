@@ -1,4 +1,4 @@
-import {GeolocateControl} from 'mapbox-gl'
+import {GeolocateControl, Map} from 'mapbox-gl'
 
 export class CustomGeolocateControl extends GeolocateControl {
   _setupUI(supported: boolean) {
@@ -9,10 +9,10 @@ export class CustomGeolocateControl extends GeolocateControl {
 }
 
 export class ExitControl {
-  public _map: any
+  public _map: Map | undefined
   public _container: HTMLDivElement | null = null
 
-  onAdd(map: any) {
+  onAdd(map: Map) {
     this._map = map
     this._container = document.createElement('div')
     this._container.className = 'mapboxgl-ctrl mapboxgl-ctrl-group'
