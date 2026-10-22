@@ -2,13 +2,12 @@
 // Modify your Keystone config when you want to change this.
 
 datasource sqlite {
-  url               = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
-  provider          = "sqlite"
+  provider = "sqlite"
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "./generated/prisma"
 }
 
 model User {
@@ -28,28 +27,28 @@ model Announcement {
 }
 
 model About {
-  id      Int    @id
-  content String @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  id      Int  @id
+  content Json
 }
 
 model Burial {
   id              Int     @id
   image_id        String?
+  image_extension String?
   image_filesize  Int?
   image_width     Int?
   image_height    Int?
-  image_extension String?
-  content         String  @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  content         Json
 }
 
 model Feedback {
   id              Int     @id
   image_id        String?
+  image_extension String?
   image_filesize  Int?
   image_width     Int?
   image_height    Int?
-  image_extension String?
-  content         String  @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  content         Json
 }
 
 model Footer {
@@ -69,10 +68,10 @@ model GalleryTag {
 model GalleryImage {
   id              String       @id @default(cuid())
   image_id        String?
+  image_extension String?
   image_filesize  Int?
   image_width     Int?
   image_height    Int?
-  image_extension String?
   caption         String       @default("")
   author          String       @default("")
   dateTaken       String
@@ -80,22 +79,22 @@ model GalleryImage {
 }
 
 model TrailPage {
-  id      Int    @id
-  content String @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  id      Int  @id
+  content Json
 }
 
 model Trail {
   id              String  @id @default(cuid())
   name            String  @default("")
   image_id        String?
+  image_extension String?
   image_filesize  Int?
   image_width     Int?
   image_height    Int?
-  image_extension String?
   length          Float
   elevationGain   Float
   difficulty      String
-  description     String  @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  description     Json
   trailCoords     String  @default("")
   colour          String  @default("#3b82f6")
 }
@@ -107,18 +106,18 @@ model Map {
 }
 
 model Privacy {
-  id      Int    @id
-  content String @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  id      Int  @id
+  content Json
 }
 
 model Disclaimer {
-  id      Int    @id
-  content String @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  id      Int  @id
+  content Json
 }
 
 model ProductsServicesPage {
-  id      Int    @id
-  content String @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  id      Int  @id
+  content Json
 }
 
 model Product {
@@ -126,18 +125,18 @@ model Product {
   title           String  @default("")
   urlId           String  @default("")
   image_id        String?
+  image_extension String?
   image_filesize  Int?
   image_width     Int?
   image_height    Int?
-  image_extension String?
   isService       Boolean @default(false)
   source          String  @default("")
-  description     String  @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  description     Json
 }
 
 model EcosystemPage {
-  id      Int    @id
-  content String @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  id      Int  @id
+  content Json
 }
 
 model Organism {
@@ -148,11 +147,11 @@ model Organism {
   type               String
   conservationStatus String  @default("Unclassified")
   image_id           String?
+  image_extension    String?
   image_filesize     Int?
   image_width        Int?
   image_height       Int?
-  image_extension    String?
-  description        String  @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  description        Json
 }
 
 model MailRecipient {
