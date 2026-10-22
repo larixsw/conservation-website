@@ -52,7 +52,7 @@ CREATE TABLE "new_Organism" (
     "scientificName" TEXT NOT NULL DEFAULT '',
     "urlId" TEXT NOT NULL DEFAULT '',
     "type" TEXT NOT NULL,
-    "conservationStatus" TEXT NOT NULL DEFAULT 'Unclassified',
+    "conservationStatus" TEXT NOT NULL DEFAULT 'NC',
     "image_id" TEXT,
     "image_extension" TEXT,
     "image_filesize" INTEGER,
