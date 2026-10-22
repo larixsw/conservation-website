@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@config '../tailwind.config.cjs';
 
 body {
   margin: 0;
@@ -39,9 +38,9 @@ input[type='submit']:disabled {
 }
 
 .geolocate-button {
-  @apply flex items-center w-fit pe-2 !important;
+  @apply flex! items-center! w-fit! pe-2!;
 }
 
 .geolocate-button > span {
-  @apply w-[29px] !important;
+  width: 29px !important;
 }
