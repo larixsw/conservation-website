@@ -14,7 +14,8 @@ import {
 } from '@keystone-6/core/fields'
 import {document} from '@keystone-6/fields-document'
 
-import type {Lists} from '.keystone/types'
+import type {Lists} from './generated/keystone/types'
+import {localImages} from './storage'
 
 /* validation regex */
 const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
@@ -68,7 +69,7 @@ export const lists: Lists = {
     access: allowAll,
     isSingleton: true,
     fields: {
-      image: image({storage: 'localImages'}),
+      image: image({storage: localImages}),
       content: document({
         formatting: true
       })
@@ -78,7 +79,7 @@ export const lists: Lists = {
     access: allowAll,
     isSingleton: true,
     fields: {
-      image: image({storage: 'localImages'}),
+      image: image({storage: localImages}),
       content: document({
         formatting: true
       })
@@ -120,7 +121,7 @@ export const lists: Lists = {
   GalleryImage: list({
     access: allowAll,
     fields: {
-      image: image({storage: 'localImages'}),
+      image: image({storage: localImages}),
       caption: text({validation: {isRequired: true, length: {max: 100}}}),
       author: text({validation: {isRequired: true}}),
       dateTaken: calendarDay({validation: {isRequired: true}}),
@@ -151,7 +152,7 @@ export const lists: Lists = {
         },
         validation: {isRequired: true}
       }),
-      image: image({storage: 'localImages'}),
+      image: image({storage: localImages}),
       length: float({
         validation: {
           isRequired: true
@@ -258,7 +259,7 @@ export const lists: Lists = {
     fields: {
       title: text({validation: {isRequired: true}}),
       urlId: text({
-        label: 'URL ID',
+        ui: {label: 'URL ID'},
         validation: {
           isRequired: true,
           match: {
@@ -267,7 +268,7 @@ export const lists: Lists = {
           }
         }
       }),
-      image: image({storage: 'localImages'}),
+      image: image({storage: localImages}),
       isService: checkbox(),
       source: text({ui: {description: 'Not required for services'}}),
       description: document({
@@ -293,7 +294,7 @@ export const lists: Lists = {
       name: text({validation: {isRequired: true}}),
       scientificName: text({validation: {isRequired: true}}),
       urlId: text({
-        label: 'URL ID',
+        ui: {label: 'URL ID'},
         validation: {
           isRequired: true,
           match: {
@@ -323,10 +324,10 @@ export const lists: Lists = {
           {label: 'Extinct in the Wild', value: 'EW'},
           {label: 'Extinct', value: 'EX'}
         ],
-        defaultValue: 'Unclassified',
+        defaultValue: 'NC',
         validation: {isRequired: true}
       }),
-      image: image({storage: 'localImages'}),
+      image: image({storage: localImages}),
       description: document({
         formatting: true
       })

@@ -9,7 +9,7 @@ services:
       - ./keystone.db:/app/keystone.db
       - ./storage/localImages:/app/storage/localImages
     environment:
-      DATABASE_URL: file:./keystone.db
+      DB_URL: file:./keystone.db
       CLIENT_URL: http://conservation.larix.dev
       API_URL: http://conservation-cms.larix.dev
       SESSION_SECRET: secret

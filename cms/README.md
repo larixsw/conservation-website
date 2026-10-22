@@ -7,9 +7,4 @@ API_URL=http://localhost:5050 # optional
 CLIENT_URL=http://localhost:5173
 SESSION_SECRET=secret # only in prod
 NODE_ENV=production # only in prod
-# variables for nodemailer
-SMTP_USER=username
-SMTP_PASSWORD=password
-SENDER_NAME="French Village Conservation"
-SENDER_ADDR=woodland@larix.dev
 ```

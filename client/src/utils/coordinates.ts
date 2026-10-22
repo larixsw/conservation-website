@@ -39,7 +39,7 @@ export class CoordPair {
   }
 
   static fromString(coordString: string): CoordPair {
-    const [lat, lng] = coordString.split(/\,\s*/)
+    const [lat, lng] = coordString.split(/,\s*/)
     return new CoordPair(Coord.fromString(lat), Coord.fromString(lng))
   }
 

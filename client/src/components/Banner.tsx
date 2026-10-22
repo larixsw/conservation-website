@@ -2,7 +2,7 @@ import {useEffect, useRef} from 'react'
 import {useQuery, gql} from '@apollo/client'
 import cx from 'classnames'
 
-export default function Banner({callback}: {callback: Function}) {
+export default function Banner({callback}: {callback: (height: number) => void}) {
   const query = gql`
     query {
       announcements(where: {active: {equals: true}}) {
@@ -24,7 +24,7 @@ export default function Banner({callback}: {callback: Function}) {
 
   useEffect(() => {
     if (data) {
-      callback(bannerRef.current?.offsetHeight)
+      callback(bannerRef.current?.offsetHeight ?? 0)
     }
   }, [data, callback])
 

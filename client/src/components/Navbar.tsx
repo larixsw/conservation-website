@@ -61,13 +61,13 @@ function NavbarMenu(props: PropsWithChildren<{windowSize: number; isOpen: boolea
   }
 }
 
-function NavbarToggle(props: PropsWithChildren<{isOpen: boolean; onToggle: Function}>) {
+function NavbarToggle(props: PropsWithChildren<{isOpen: boolean; onToggle: (isOpen: boolean) => void}>) {
   return (
     <button className={cx('nav-icon', {open: props.isOpen})} onClick={() => props.onToggle(!props.isOpen)}>
       <span className={cx({'mt-[-8px]': !props.isOpen, 'mt-0 opacity-0': props.isOpen})}></span>
       <span className={cx({'mt-[8px]': !props.isOpen, 'mt-0 opacity-0': props.isOpen})}></span>
-      <span className={cx({'opacity-0': !props.isOpen, 'opacity-1 rotate-45': props.isOpen})}></span>
-      <span className={cx({'opacity-0': !props.isOpen, 'opacity-1 -rotate-45': props.isOpen})}></span>
+      <span className={cx({'opacity-0': !props.isOpen, 'opacity-100 rotate-45': props.isOpen})}></span>
+      <span className={cx({'opacity-0': !props.isOpen, 'opacity-100 -rotate-45': props.isOpen})}></span>
     </button>
   )
 }

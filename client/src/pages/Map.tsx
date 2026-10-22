@@ -114,7 +114,7 @@ function Mapbox() {
   const {data} = useQuery<MapData>(query)
 
   const mapContainer = useRef<HTMLDivElement>(null)
-  const map = useRef<any>(null)
+  const map = useRef<mapboxgl.Map | null>(null)
 
   useEffect(() => {
     if (map.current || !data) {
@@ -127,7 +127,7 @@ function Mapbox() {
     const scaledZoom = zoom - Math.log2(992 / mapContainer.current!.clientWidth)
     const trails = data?.trails
 
-    map.current = new mapboxgl.Map({
+    const newMap = new mapboxgl.Map({
       container: mapContainer.current!,
       style: 'mapbox://styles/mapbox/outdoors-v12',
       center: centre,
@@ -135,9 +135,10 @@ function Mapbox() {
       attributionControl: false,
       minZoom: scaledZoom
     })
+    map.current = newMap
 
-    map.current.addControl(new ExitControl(), 'top-right')
-    map.current.addControl(
+    newMap.addControl(new ExitControl(), 'top-right')
+    newMap.addControl(
       new CustomGeolocateControl({
         positionOptions: {
           enableHighAccuracy: true
@@ -147,10 +148,10 @@ function Mapbox() {
       }),
       'top-left'
     )
-    map.current.addControl(new mapboxgl.NavigationControl(), 'top-left')
+    newMap.addControl(new mapboxgl.NavigationControl(), 'top-left')
 
-    map.current.on('load', () => trails.forEach(trail => addLayers(trail, map.current)))
-    map.current.resize()
+    newMap.on('load', () => trails.forEach(trail => addLayers(trail, newMap)))
+    newMap.resize()
   }, [data])
 
   return <div ref={mapContainer} className="w-full h-full"></div>

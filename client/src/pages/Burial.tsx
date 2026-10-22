@@ -6,6 +6,7 @@ import axios from 'axios'
 import cx from 'classnames'
 
 import Page from '../components/Page'
+import {DocumentField} from '../components/Document'
 
 export default function Burial() {
   const query = gql`
@@ -28,7 +29,7 @@ export default function Burial() {
       image: {
         url: string
       }
-      content: any
+      content: DocumentField
     }
     mailRecipients: {
       email: string
@@ -90,7 +91,7 @@ function BurialForm(props: {emails: string}) {
       await axios.post('/send-message', body)
       reset()
       setFormState(states.submitted)
-    } catch (error) {
+    } catch {
       setFormState(states.failed)
     }
   }
@@ -129,7 +130,7 @@ function BurialForm(props: {emails: string}) {
               type="tel"
               id="phone"
               placeholder="(902) 555-1234"
-              {...register('phone', {pattern: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im})}
+              {...register('phone', {pattern: /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im})}
               className={cx({invalid: errors.phone})}
             />
             {errors.phone && <p className="text-sm text-red-600">Please enter a valid phone number</p>}

@@ -1,3 +1,5 @@
+@reference 'tailwindcss';
+
 .nav-icon {
   @apply flex items-center px-3 py-2 w-[40px] h-[24px] cursor-pointer text-white;
 }

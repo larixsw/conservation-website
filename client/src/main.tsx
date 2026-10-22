@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
-import {BrowserRouter, Routes, Route, Outlet, useLocation} from 'react-router-dom'
-import {ErrorBoundary} from 'react-error-boundary'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client'
 import axios from 'axios'
 
@@ -19,10 +18,8 @@ import Product from './pages/Product'
 import Ecosystem from './pages/Ecosystem'
 import Organism from './pages/Organism'
 
-import Banner from './components/Banner'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import MessagePage from './components/MessagePage'
+import Layout from './components/Layout'
+import PageNotFound from './pages/PageNotFound'
 
 import './index.css'
 
@@ -60,50 +57,3 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     </ApolloProvider>
   </React.StrictMode>
 )
-
-function Layout() {
-  const location = useLocation()
-
-  useEffect(() => {
-    document.documentElement.scrollTo(0, 0)
-  }, [location.pathname])
-
-  const [bannerHeight, setBannerHeight] = useState<number>(0)
-
-  return (
-    <>
-      <header>
-        <Banner callback={(height: number) => setBannerHeight(height)} />
-        <Navbar />
-      </header>
-      <main className="flex" style={{minHeight: `calc(100vh - 80px - ${bannerHeight}px)`}}>
-        <ErrorBoundary fallback={<GenericError />} key={location.pathname}>
-          <Outlet />
-        </ErrorBoundary>
-      </main>
-      <footer>
-        <Footer />
-      </footer>
-    </>
-  )
-}
-
-function PageNotFound() {
-  return (
-    <MessagePage name="404: Page Not Found">
-      The page that you requested was not found.
-      <br />
-      Please verify that the URL is correct and try again.
-    </MessagePage>
-  )
-}
-
-function GenericError() {
-  return (
-    <MessagePage name="Error">
-      An unexpected error has occurred.
-      <br />
-      We apologize for the inconvenience. Please try again later.
-    </MessagePage>
-  )
-}

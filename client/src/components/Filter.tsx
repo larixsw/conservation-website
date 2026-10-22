@@ -3,7 +3,7 @@ import cx from 'classnames'
 interface FilterProps {
   tag: string
   filter: string | null
-  callback: Function
+  callback: (tag: string | null) => void
 }
 
 export default function Filter(props: FilterProps) {
