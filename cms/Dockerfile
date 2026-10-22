@@ -3,7 +3,12 @@ FROM node:alpine AS base
 RUN apk add --no-cache openssl
 WORKDIR /app
 
-FROM base AS build
+# the build output is platform-independent, so build natively instead of under qemu,
+# where prisma's wasm schema engine returns corrupted output for arm64
+FROM --platform=$BUILDPLATFORM node:alpine AS build
+
+RUN apk add --no-cache openssl
+WORKDIR /app
 
 COPY . .
 RUN npm ci
