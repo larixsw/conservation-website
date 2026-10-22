@@ -145,7 +145,7 @@ model Organism {
   scientificName     String  @default("")
   urlId              String  @default("")
   type               String
-  conservationStatus String  @default("Unclassified")
+  conservationStatus String  @default("NC")
   image_id           String?
   image_extension    String?
   image_filesize     Int?

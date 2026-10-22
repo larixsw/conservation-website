@@ -324,7 +324,7 @@ export const lists: Lists = {
           {label: 'Extinct in the Wild', value: 'EW'},
           {label: 'Extinct', value: 'EX'}
         ],
-        defaultValue: 'Unclassified',
+        defaultValue: 'NC',
         validation: {isRequired: true}
       }),
       image: image({storage: localImages}),
